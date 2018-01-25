@@ -116,9 +116,8 @@ MailgunTransport.prototype.send = function send(mail, callback) {
           if (typeof attachment.content === 'string') {
             data = new Buffer(attachment.content, attachment.encoding);
           } else {
-            data = attachment.content || attachment.path || undefined;
+            data = attachment.content || attachment.path || attachment.stream || undefined;
           }
-          //console.log(data);
           mailgunAttachment = new self.mailgun.Attachment({
             data: data,
             filename: attachment.cid || attachment.filename || undefined,
